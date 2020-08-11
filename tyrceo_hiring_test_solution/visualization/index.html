@@ -32,11 +32,13 @@
 
 	var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v11'
+		style: 'mapbox://styles/mapbox/streets-v11',
+		center: [2.9, 39.63],
+		zoom: 9
 	});
 
 	map.on('style.load', function() {
-		map.addSource("pokemons", {
+		map.addSource("points", {
 			type: "geojson",
 			data: "../data_wrangling/points.geojson"
 				/*$.ajax({
@@ -50,7 +52,35 @@
 						console.log('ERROR', textStatus, errorThrown);
 					}
 				})*/
-		})
+		});
+
+		map.addLayer({
+			'id': 'pokemons',
+			'type': 'circle',
+			'source': 'points',
+			'layout': { },
+			'paint': {
+				// make circles larger as the user zooms from z12 to z22
+				'circle-radius': {
+				'base': 3,
+				'stops': [
+					[12, 4],
+					[22, 180]
+					]
+				},
+				'circle-color': [
+					'match',
+					['get', 'pokemon'],
+					'Charmander',
+					'#f54242',
+					'Bulbasaur',
+					'#42f545',
+					'Squirtle',
+					'#42b9f5',
+					/* other */ '#ccc'
+				]
+			}
+		});
 	})
 
 </script>
