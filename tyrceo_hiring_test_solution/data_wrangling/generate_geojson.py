@@ -29,11 +29,11 @@ try:
 			 INNER JOIN coordinates 
 			    ON data.id=coordinates.id 
 			 WHERE score >= 0.5 
-			   AND pokemon IN ('Charmander', 'Bulbasur', 'Squirtle')
+			   AND pokemon IN ('Charmander', 'Bulbasaur', 'Squirtle')
 			 ORDER BY data.id 
 			"""
 		#Array with starter names
-		fixed_poke = ["Charmander", "Bulbasur", "Squirtle"]
+		fixed_poke = ["Charmander", "Bulbasaur", "Squirtle"]
 
 		#Creation of the originalDF
 		cursor.execute(sql)
@@ -80,7 +80,7 @@ try:
 
 		#Creating geojson from GeoPandas DataFrame
 
-		gdf.to_file("../data_wrangling/points.geojson", driver='GeoJSON')
+		gdf.to_file("./data_wrangling/points.geojson", driver='GeoJSON')
 
 finally:
 	connection.close()
