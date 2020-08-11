@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+
+	mapboxgl.accessToken = 'pk.eyJ1Ijoiam1jYXJyYXNjb3NhIiwiYSI6ImNrZGlvcmIzMzA3MW0zMG50dG90NWJ0aTEifQ.ZoobdVV5OqJUUVH-k2ZHDg';
+
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/streets-v11'
+	});
+
+	map.on('style.load', function() {
+		map.addSource("pokemons", {
+			type: "geojson",
+			data: "../data_wrangling/points.geojson"
+				/*$.ajax({
+					type: "GET",
+					file: "../data_wrangling/points.geojson",
+					dataType: "geojson",
+					success: function(data) {
+						return data;
+					},	
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log('ERROR', textStatus, errorThrown);
+					}
+				})*/
+		})
+	})
+
+</script>
+
+</body>
+</html>
