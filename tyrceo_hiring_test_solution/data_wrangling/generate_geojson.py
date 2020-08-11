@@ -74,22 +74,6 @@ try:
 			df2, geometry=gpd.points_from_xy(df2.longitude, df.latitude)
 		)
 
-		#Adding color for plots based on Starter
-
-		colorArray = []
-
-		#print(df2)
-
-		for index, row in df2.iterrows():
-			if row['pokemon'] == "Charmander":
-				colorArray.append('#f54242')
-			elif row['pokemon'] == "Bulbasur":
-				colorArray.append('#42f545')
-			else: 
-				colorArray.append('#42b9f5')
-
-		gdf['color'] = colorArray
-
 		columns_to_delete = ['latitude', 'longitude']
 		gdf.drop(columns_to_delete, inplace=True, axis=1)
 		gdf.drop_duplicates(inplace=True)
